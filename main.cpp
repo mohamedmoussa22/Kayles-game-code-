@@ -1,50 +1,40 @@
 #include <iostream>
-#include <vector>
 using namespace std;
+
+// word : Stores input string
+// sub : Stores current subset
+// index : Index in current subset, curr
+void powerSet(string word, int index = -1,string sub = "")
+{
+
+	// base case
+	if (index ==  word.length())
+
+		return;
+
+	// First print current subset
+	cout << sub << "\n";
+
+	// Try appending remaining characters
+	// to current subset
+	for (int i = index + 1; i <  word.length(); i++) {
+
+		sub += word[i];
+		powerSet(word, i, sub);
+
+		// Once all subsets beginning with
+		// initial "sub" are printed, remove
+		// last character to consider a different
+		// prefix of subsets.
+		sub.erase(sub.size() - 1);
+	}
+	return;
+}
+
+// Driver code
 int main()
 {
-   int x,sum=0,temp;
-   vector<int>grades;
-   vector<int>varibales;
-   for(int i=0;i<=grades.size();i++){
-    cout<<"Enter grades to finish press -1 "<<endl;
-    cin>>x;
-    if (x!=-1){
-    grades.push_back(x);
-    }
-    }
- for(int j=0;j<grades.size();j++)
-         {
-    for(int y=j+1;y<grades.size();y++)
-         {
-        if (grades[j]>grades[y])
-          {
-              temp=grades[j];
-              grades[j]=grades[y];
-              grades[y]=temp;
-         }
-          }
-         }
-  for(int k=0;k<grades.size();){
-    for(int n=0;n<grades.size();n++){
-            if (grades[k]==grades[n]){
-                sum=sum+1;
-
-             }
-            else if (grades[k]>=grades[n]){
-                     k++;
-
-
-            }
-
-
-    }
-     cout<<" numbers of " <<grades[k] << " is " << sum <<endl;
-
-    }
-
-
-
-  return 0;
-
+	string word = "happy";
+	powerSet(word);
+	return 0;
 }
